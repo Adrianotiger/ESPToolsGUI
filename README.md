@@ -20,6 +20,6 @@ You can compile it by yourself (as it is not signed) or download it from the rel
 ESP Tools - all Python scripts:  
 https://github.com/espressif/esptool/wiki
 
-PY 2 EXE - converter to catch console output to GUI:
+PY 2 EXE - converter to catch console output to GUI:  
 https://github.com/brentvollebregt/auto-py-to-exe
 
