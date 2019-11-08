@@ -8,7 +8,7 @@ namespace esp_tools_gui
 {
     class ToolPartition : Tool
     {
-        public ToolPartition() : base(Properties.Resources.gen_esp32part, "gen_esp32part.exe")
+        public ToolPartition() : base(Properties.Resources.gen_esp32part, "gen_esp32part.exe", false)
         {
 
         }

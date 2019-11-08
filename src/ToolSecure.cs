@@ -8,7 +8,7 @@ namespace esp_tools_gui
 {
     class ToolSecure : Tool
     {
-        public ToolSecure() : base(Properties.Resources.espsecure, "espsecure.exe")
+        public ToolSecure() : base(Properties.Resources.espsecure, "espsecure.exe", true)
         {
 
         }

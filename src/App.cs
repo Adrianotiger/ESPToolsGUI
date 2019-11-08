@@ -10,7 +10,8 @@ namespace esp_tools_gui
     {
         public static MainPage form;
 
-        static void Main(string[] args) {
+        static void Main() {
+            
             form = new MainPage();
             form.ShowDialog();
         }

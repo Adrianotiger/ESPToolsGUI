@@ -44,6 +44,12 @@ namespace esp_tools_gui
             ExpertComboboxTool.SelectedIndex = 0;
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            this.Text += " - (v." + Application.ProductVersion + ")";
+        }
+
         private void MainPage_Load(object sender, EventArgs e)
         {
             using (var searcher = new ManagementObjectSearcher("SELECT * FROM WIN32_SerialPort"))
@@ -108,7 +114,7 @@ namespace esp_tools_gui
         {
             progressBar1.Value = 10;
             progressBar1.Visible = true;
-            tool.Parse("flash_id");
+            tool.Parse("--after no_reset flash_id");
             tabControl1.SelectedIndex = 0;
             progressBar1.Value = 20;
             infoTextboxChipType.Text = tool.ChipType;
@@ -182,25 +188,33 @@ namespace esp_tools_gui
             Application.DoEvents();
             progressBar1.Visible = false;
         }
-
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        
+        private async void comboBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == '\r')
+            if (e.KeyChar == '\r')
             {
-                switch(ExpertComboboxTool.Text)
+                var text = (sender as ComboBox).Text;
+                switch (ExpertComboboxTool.Text)
                 {
-                    case "esptool": tool.Execute((sender as TextBox).Text); break;
-                    case "espefuse": efuse.Execute((sender as TextBox).Text); break;
-                    case "espsecure": secure.Execute((sender as TextBox).Text); break;
-                    case "gen_esp32part": partition.Execute((sender as TextBox).Text); break;
+                    case "esptool": await tool.Execute(text); break;
+                    case "espefuse": await efuse.Execute(text); break;
+                    case "espsecure": await secure.Execute(text); break;
+                    case "gen_esp32part": await partition.Execute(text); break;
                 }
+
+                for(var k=0;k<comboBox3.Items.Count;k++)
+                {
+                    if(comboBox3.Items[k].ToString() == text)
+                    {
+                        if (k != 0) comboBox3.Items.RemoveAt(k);
+                        else return;
+                        break;
+                    }
+                }
+                if(text.Length > 1) comboBox3.Items.Insert(0, text);
             }
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
         void HandleCustomEvent(object sender, CustomEventArgs a)
         {
             if (richTextBox1.InvokeRequired)
@@ -230,6 +244,16 @@ namespace esp_tools_gui
                 richTextBox1.AppendText(txt);
                 richTextBox1.ScrollToCaret();
             }
+        }
+
+        private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start((sender as LinkLabel).Text);
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 

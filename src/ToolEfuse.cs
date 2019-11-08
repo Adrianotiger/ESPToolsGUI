@@ -10,14 +10,14 @@ namespace esp_tools_gui
     {
         public Dictionary<string, List<EFuse>> Fuses = new Dictionary<string, List<EFuse>>();
 
-        public ToolEfuse() : base(Properties.Resources.espefuse, "espefuse.exe")
+        public ToolEfuse() : base(Properties.Resources.espefuse, "espefuse.exe", true)
         {
             
         }
 
-        public void Parse(string args)
+        public async void Parse(string args)
         {
-            var str = Execute(args);
+            var str = await Execute(args);
             if(args.Contains("summary"))
             {
                 //ChipType = RegexSimple("Detecting chip type...", str);

@@ -18,14 +18,14 @@ namespace esp_tools_gui
 
         public List<Partition> Partitions { get; set; } = new List<Partition>();
 
-        public ToolTool() : base(Properties.Resources.esptool, "esptool.exe")
+        public ToolTool() : base(Properties.Resources.esptool, "esptool.exe", true)
         {
 
         }
 
-        public void Parse(string args)
+        public async void Parse(string args)
         {
-            var str = Execute(args);
+            var str = await Execute(args);
             if (args.Contains("chip_id"))
             {
                 ChipType = RegexSimple("Detecting chip type...", str);
@@ -47,28 +47,35 @@ namespace esp_tools_gui
 
             if (args.Contains("read_flash") && args.Contains("temp.bin"))
             {
-                using (FileStream fs2 = new FileStream("temp.bin", FileMode.Open))
+                try
                 {
-                    using (BinaryReader r = new BinaryReader(fs2))
+                    using (FileStream fs2 = new FileStream("temp.bin", FileMode.Open))
                     {
-                        Int16 start;
-                        Partitions.Clear();
-
-                        do
+                        using (BinaryReader r = new BinaryReader(fs2))
                         {
-                            var p = new Partition();
+                            Int16 start;
+                            Partitions.Clear();
 
-                            start = r.ReadByte();
-                            if (start != 0xaa) break;
-                            p.Flags = r.ReadByte();
-                            p.Type = r.ReadByte();
-                            p.Subtype = r.ReadByte();
-                            p.Offset = r.ReadUInt32();
-                            p.Size = r.ReadUInt32();
-                            p.Name = Encoding.UTF8.GetString(r.ReadBytes(20), 0, 20);
-                            Partitions.Add(p);
-                        } while (start == 0xaa);
+                            do
+                            {
+                                var p = new Partition();
+
+                                start = r.ReadByte();
+                                if (start != 0xaa) break;
+                                p.Flags = r.ReadByte();
+                                p.Type = r.ReadByte();
+                                p.Subtype = r.ReadByte();
+                                p.Offset = r.ReadUInt32();
+                                p.Size = r.ReadUInt32();
+                                p.Name = Encoding.UTF8.GetString(r.ReadBytes(20), 0, 20);
+                                Partitions.Add(p);
+                            } while (start == 0xaa);
+                        }
                     }
+                }
+                catch(Exception)
+                {
+                    // todo: failed to open image... command was not successfully
                 }
             }
         }

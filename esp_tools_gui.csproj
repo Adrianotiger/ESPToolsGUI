@@ -51,10 +51,10 @@
     <StartupObject>esp_tools_gui.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>ESP32.ico</ApplicationIcon>
+    <ApplicationIcon>src\ESP32.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="src\App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -70,11 +70,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.cs" />
-    <Compile Include="MainPage.cs">
+    <Compile Include="src\App.cs" />
+    <Compile Include="src\Connecting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainPage.Designer.cs">
+    <Compile Include="src\Connecting.Designer.cs">
+      <DependentUpon>Connecting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\MainPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\MainPage.Designer.cs">
       <DependentUpon>MainPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,19 +94,23 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Tool.cs" />
-    <Compile Include="ToolEfuse.cs" />
-    <Compile Include="ToolPartition.cs" />
-    <Compile Include="ToolSecure.cs" />
-    <Compile Include="ToolTool.cs" />
+    <Compile Include="src\Tool.cs" />
+    <Compile Include="src\ToolEfuse.cs" />
+    <Compile Include="src\ToolPartition.cs" />
+    <Compile Include="src\ToolSecure.cs" />
+    <Compile Include="src\ToolTool.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MainPage.resx">
+    <EmbeddedResource Include="src\Connecting.resx">
+      <DependentUpon>Connecting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\MainPage.resx">
       <DependentUpon>MainPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -130,7 +140,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ESP32.ico" />
+    <Content Include="src\ESP32.ico" />
     <Content Include="images\esp32.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
