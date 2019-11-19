@@ -44,24 +44,32 @@ namespace esp_tools_gui
                 MAC = RegexSimple("MAC:", str);
                 Flash = RegexSimple("Detected flash size:", str);
             }
+        }
 
-            if (args.Contains("read_flash") && args.Contains("temp.bin"))
+        public Byte[] ReadMemory(int startAddress, int size)
+        {
+            String start = startAddress.ToString("x");
+            String total = size.ToString("x");
+            Parse("read_flash 0x" + start + " 0x" + total + " temp.bin");
+
+            if(startAddress == 0x8000 && size == 0x400) // read partition info
             {
                 try
                 {
-                    using (FileStream fs2 = new FileStream("temp.bin", FileMode.Open))
+                    string binFile = Path.Combine(ExePath, "temp.bin");
+                    using (FileStream fs2 = new FileStream(binFile, FileMode.Open))
                     {
                         using (BinaryReader r = new BinaryReader(fs2))
                         {
-                            Int16 start;
+                            Int16 startPart;
                             Partitions.Clear();
 
                             do
                             {
                                 var p = new Partition();
 
-                                start = r.ReadByte();
-                                if (start != 0xaa) break;
+                                startPart = r.ReadByte();
+                                if (startPart != 0xaa) break;
                                 p.Flags = r.ReadByte();
                                 p.Type = r.ReadByte();
                                 p.Subtype = r.ReadByte();
@@ -69,15 +77,22 @@ namespace esp_tools_gui
                                 p.Size = r.ReadUInt32();
                                 p.Name = Encoding.UTF8.GetString(r.ReadBytes(20), 0, 20);
                                 Partitions.Add(p);
-                            } while (start == 0xaa);
+                            } while (startPart == 0xaa);
                         }
                     }
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     // todo: failed to open image... command was not successfully
                 }
             }
+
+            return File.ReadAllBytes(ExePath + "\\temp.bin");
+        }
+
+        public void ReadPartitionTable()
+        {
+            ReadMemory(0x8000, 0x400);
         }
     }
 
@@ -126,9 +141,9 @@ namespace esp_tools_gui
             double size = Size;
             if (size < 1000) return size.ToString("0") + " bytes";
             size = size / 1024;
-            if (size < 1000) return size.ToString("0.000") + " kb";
-            size = size / 1024;
-            return size.ToString("0.000") + " Mb";
+            /*if (size < 1000)*/ return size.ToString("0.000") + " kb";
+            //size = size / 1024;
+            //return size.ToString("0.000") + " Mb";
         }
     }
 }

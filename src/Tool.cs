@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace esp_tools_gui
 {
-    class Tool
+    public class Tool
     {
         private byte[] _resource;
         private string _exe;
@@ -19,7 +19,7 @@ namespace esp_tools_gui
         public static string _baud;
 
         private StringBuilder _outStr = new StringBuilder();
-        private readonly static string ExePath = Path.Combine(Directory.GetCurrentDirectory(), "exes");
+        protected readonly static string ExePath = Path.Combine(Directory.GetCurrentDirectory(), "exes");
         private bool _useComArgs = true;
 
         public event EventHandler<CustomEventArgs> ConsoleEvent;
@@ -92,6 +92,11 @@ namespace esp_tools_gui
             conn.ShowDialog();
 
             return await Task.FromResult(_outStr.ToString());
+        }
+
+        public string GetExePath()
+        {
+            return ExePath;
         }
 
         public string RegexSimple(string beginsWith, string txt)

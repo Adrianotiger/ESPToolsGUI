@@ -99,5 +99,15 @@ namespace esp_tools_gui.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        /// </summary>
+        public static byte[] parttool {
+            get {
+                object obj = ResourceManager.GetObject("parttool", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

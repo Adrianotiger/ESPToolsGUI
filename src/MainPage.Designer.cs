@@ -35,12 +35,13 @@
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.button1 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -65,9 +66,29 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStripPartition = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.readFlashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ereasePartitionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.editPartitionTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.partitionChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.splitContainer5 = new System.Windows.Forms.SplitContainer();
+            this.numericUpDownFlashCount = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownFlashAddr = new System.Windows.Forms.NumericUpDown();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.buttonReadFlash = new System.Windows.Forms.Button();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.splitContainer6 = new System.Windows.Forms.SplitContainer();
+            this.richTextBoxFlashLine = new System.Windows.Forms.RichTextBox();
+            this.splitContainer7 = new System.Windows.Forms.SplitContainer();
+            this.richTextBoxFlashHex = new System.Windows.Forms.RichTextBox();
+            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
+            this.richTextBoxFlashData = new System.Windows.Forms.RichTextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -93,6 +114,10 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.EspImageList = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -101,90 +126,130 @@
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage3.SuspendLayout();
+            this.contextMenuStripPartition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.partitionChart)).BeginInit();
             this.tabPage4.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
+            this.splitContainer5.Panel1.SuspendLayout();
+            this.splitContainer5.Panel2.SuspendLayout();
+            this.splitContainer5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFlashCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFlashAddr)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).BeginInit();
+            this.splitContainer6.Panel1.SuspendLayout();
+            this.splitContainer6.Panel2.SuspendLayout();
+            this.splitContainer6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).BeginInit();
+            this.splitContainer7.Panel1.SuspendLayout();
+            this.splitContainer7.Panel2.SuspendLayout();
+            this.splitContainer7.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.progressBar1);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.splitContainer3);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(822, 72);
+            this.groupBox1.Size = new System.Drawing.Size(822, 66);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Connection";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer3.Location = new System.Drawing.Point(3, 16);
+            this.splitContainer3.Margin = new System.Windows.Forms.Padding(0);
+            this.splitContainer3.Name = "splitContainer3";
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.progressBar1);
+            this.splitContainer3.Panel1.Controls.Add(this.comboBox1);
+            this.splitContainer3.Panel1.Controls.Add(this.label1);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.comboBox2);
+            this.splitContainer3.Panel2.Controls.Add(this.label2);
+            this.splitContainer3.Panel2.Controls.Add(this.button1);
+            this.splitContainer3.Size = new System.Drawing.Size(816, 47);
+            this.splitContainer3.SplitterDistance = 460;
+            this.splitContainer3.TabIndex = 6;
+            // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(20, 59);
+            this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.progressBar1.Location = new System.Drawing.Point(0, 15);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(0);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(508, 10);
+            this.progressBar1.Size = new System.Drawing.Size(460, 11);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar1.TabIndex = 5;
+            this.progressBar1.TabIndex = 7;
             this.progressBar1.Value = 10;
             this.progressBar1.Visible = false;
             // 
-            // button1
+            // comboBox1
             // 
-            this.button1.Location = new System.Drawing.Point(399, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 37);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Connect";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(0, 26);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(460, 21);
+            this.comboBox1.TabIndex = 11;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(89, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Select COM Port:";
             // 
             // comboBox2
             // 
+            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(234, 36);
+            this.comboBox2.Location = new System.Drawing.Point(3, 26);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(143, 21);
-            this.comboBox2.TabIndex = 3;
+            this.comboBox2.TabIndex = 10;
             this.comboBox2.Text = "115200";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(232, 18);
+            this.label2.Location = new System.Drawing.Point(5, 3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
-            this.label2.TabIndex = 2;
+            this.label2.TabIndex = 11;
             this.label2.Text = "Baud rate:";
             // 
-            // label1
+            // button1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Select COM Port:";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(20, 36);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(208, 21);
-            this.comboBox1.TabIndex = 0;
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(183, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(160, 37);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Connect";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 72);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 66);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -195,7 +260,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.richTextBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(822, 477);
+            this.splitContainer1.Size = new System.Drawing.Size(822, 483);
             this.splitContainer1.SplitterDistance = 288;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -204,6 +269,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -371,13 +437,15 @@
             this.columnHeader4,
             this.columnHeader5,
             this.columnHeader6});
+            this.partitionListview.ContextMenuStrip = this.contextMenuStripPartition;
             this.partitionListview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.partitionListview.FullRowSelect = true;
             this.partitionListview.GridLines = true;
             this.partitionListview.HideSelection = false;
             this.partitionListview.Location = new System.Drawing.Point(258, 0);
             this.partitionListview.Name = "partitionListview";
             this.partitionListview.Size = new System.Drawing.Size(556, 262);
-            this.partitionListview.TabIndex = 3;
+            this.partitionListview.TabIndex = 4;
             this.partitionListview.UseCompatibleStateImageBehavior = false;
             this.partitionListview.View = System.Windows.Forms.View.Details;
             // 
@@ -411,6 +479,42 @@
             // 
             this.columnHeader6.Text = "Flags";
             this.columnHeader6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // contextMenuStripPartition
+            // 
+            this.contextMenuStripPartition.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.readFlashToolStripMenuItem,
+            this.ereasePartitionToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.editPartitionTableToolStripMenuItem});
+            this.contextMenuStripPartition.Name = "contextMenuStripPartition";
+            this.contextMenuStripPartition.Size = new System.Drawing.Size(181, 98);
+            // 
+            // readFlashToolStripMenuItem
+            // 
+            this.readFlashToolStripMenuItem.Name = "readFlashToolStripMenuItem";
+            this.readFlashToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.readFlashToolStripMenuItem.Text = "Read Partition";
+            this.readFlashToolStripMenuItem.Click += new System.EventHandler(this.readFlashToolStripMenuItem_Click);
+            // 
+            // ereasePartitionToolStripMenuItem
+            // 
+            this.ereasePartitionToolStripMenuItem.Name = "ereasePartitionToolStripMenuItem";
+            this.ereasePartitionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ereasePartitionToolStripMenuItem.Text = "Erease Partition";
+            this.ereasePartitionToolStripMenuItem.Click += new System.EventHandler(this.ereasePartitionToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // editPartitionTableToolStripMenuItem
+            // 
+            this.editPartitionTableToolStripMenuItem.Name = "editPartitionTableToolStripMenuItem";
+            this.editPartitionTableToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editPartitionTableToolStripMenuItem.Text = "Edit Partition Table";
+            this.editPartitionTableToolStripMenuItem.Click += new System.EventHandler(this.editPartitionTableToolStripMenuItem_Click);
             // 
             // partitionChart
             // 
@@ -460,6 +564,225 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(814, 262);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.splitContainer5);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Size = new System.Drawing.Size(814, 262);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "Flash Reader";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer5
+            // 
+            this.splitContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer5.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer5.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer5.Name = "splitContainer5";
+            // 
+            // splitContainer5.Panel1
+            // 
+            this.splitContainer5.Panel1.Controls.Add(this.numericUpDownFlashCount);
+            this.splitContainer5.Panel1.Controls.Add(this.numericUpDownFlashAddr);
+            this.splitContainer5.Panel1.Controls.Add(this.label25);
+            this.splitContainer5.Panel1.Controls.Add(this.label24);
+            this.splitContainer5.Panel1.Controls.Add(this.buttonReadFlash);
+            this.splitContainer5.Panel1.Controls.Add(this.label23);
+            this.splitContainer5.Panel1.Controls.Add(this.label22);
+            // 
+            // splitContainer5.Panel2
+            // 
+            this.splitContainer5.Panel2.Controls.Add(this.splitContainer6);
+            this.splitContainer5.Size = new System.Drawing.Size(814, 262);
+            this.splitContainer5.SplitterDistance = 168;
+            this.splitContainer5.TabIndex = 0;
+            // 
+            // numericUpDownFlashCount
+            // 
+            this.numericUpDownFlashCount.Hexadecimal = true;
+            this.numericUpDownFlashCount.Location = new System.Drawing.Point(52, 86);
+            this.numericUpDownFlashCount.Maximum = new decimal(new int[] {
+            16777216,
+            0,
+            0,
+            0});
+            this.numericUpDownFlashCount.Name = "numericUpDownFlashCount";
+            this.numericUpDownFlashCount.Size = new System.Drawing.Size(92, 20);
+            this.numericUpDownFlashCount.TabIndex = 3;
+            this.numericUpDownFlashCount.Value = new decimal(new int[] {
+            768,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownFlashAddr
+            // 
+            this.numericUpDownFlashAddr.Hexadecimal = true;
+            this.numericUpDownFlashAddr.Location = new System.Drawing.Point(52, 30);
+            this.numericUpDownFlashAddr.Maximum = new decimal(new int[] {
+            16777216,
+            0,
+            0,
+            0});
+            this.numericUpDownFlashAddr.Name = "numericUpDownFlashAddr";
+            this.numericUpDownFlashAddr.Size = new System.Drawing.Size(92, 20);
+            this.numericUpDownFlashAddr.TabIndex = 1;
+            this.numericUpDownFlashAddr.Value = new decimal(new int[] {
+            32768,
+            0,
+            0,
+            0});
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(37, 88);
+            this.label25.Margin = new System.Windows.Forms.Padding(0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(18, 13);
+            this.label25.TabIndex = 6;
+            this.label25.Text = "0x";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(37, 32);
+            this.label24.Margin = new System.Windows.Forms.Padding(0);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(18, 13);
+            this.label24.TabIndex = 5;
+            this.label24.Text = "0x";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // buttonReadFlash
+            // 
+            this.buttonReadFlash.Location = new System.Drawing.Point(11, 132);
+            this.buttonReadFlash.Name = "buttonReadFlash";
+            this.buttonReadFlash.Size = new System.Drawing.Size(132, 28);
+            this.buttonReadFlash.TabIndex = 4;
+            this.buttonReadFlash.Text = "READ";
+            this.buttonReadFlash.UseVisualStyleBackColor = true;
+            this.buttonReadFlash.Click += new System.EventHandler(this.buttonReadFlash_Click);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(8, 70);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(97, 13);
+            this.label23.TabIndex = 2;
+            this.label23.Text = "Size to read (HEX):";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(8, 14);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(103, 13);
+            this.label22.TabIndex = 0;
+            this.label22.Text = "Start address (HEX):";
+            // 
+            // splitContainer6
+            // 
+            this.splitContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer6.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer6.IsSplitterFixed = true;
+            this.splitContainer6.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer6.Name = "splitContainer6";
+            // 
+            // splitContainer6.Panel1
+            // 
+            this.splitContainer6.Panel1.Controls.Add(this.richTextBoxFlashLine);
+            // 
+            // splitContainer6.Panel2
+            // 
+            this.splitContainer6.Panel2.Controls.Add(this.splitContainer7);
+            this.splitContainer6.Size = new System.Drawing.Size(642, 262);
+            this.splitContainer6.SplitterDistance = 78;
+            this.splitContainer6.SplitterWidth = 1;
+            this.splitContainer6.TabIndex = 1;
+            // 
+            // richTextBoxFlashLine
+            // 
+            this.richTextBoxFlashLine.AutoWordSelection = true;
+            this.richTextBoxFlashLine.BackColor = System.Drawing.Color.MistyRose;
+            this.richTextBoxFlashLine.DetectUrls = false;
+            this.richTextBoxFlashLine.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxFlashLine.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBoxFlashLine.HideSelection = false;
+            this.richTextBoxFlashLine.Location = new System.Drawing.Point(0, 0);
+            this.richTextBoxFlashLine.Name = "richTextBoxFlashLine";
+            this.richTextBoxFlashLine.ReadOnly = true;
+            this.richTextBoxFlashLine.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.richTextBoxFlashLine.Size = new System.Drawing.Size(78, 262);
+            this.richTextBoxFlashLine.TabIndex = 2;
+            this.richTextBoxFlashLine.Text = "";
+            this.richTextBoxFlashLine.SelectionChanged += new System.EventHandler(this.richTextBoxFlashLine_SelectionChanged);
+            // 
+            // splitContainer7
+            // 
+            this.splitContainer7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer7.IsSplitterFixed = true;
+            this.splitContainer7.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer7.Name = "splitContainer7";
+            // 
+            // splitContainer7.Panel1
+            // 
+            this.splitContainer7.Panel1.Controls.Add(this.richTextBoxFlashHex);
+            // 
+            // splitContainer7.Panel2
+            // 
+            this.splitContainer7.Panel2.Controls.Add(this.vScrollBar1);
+            this.splitContainer7.Panel2.Controls.Add(this.richTextBoxFlashData);
+            this.splitContainer7.Size = new System.Drawing.Size(563, 262);
+            this.splitContainer7.SplitterDistance = 365;
+            this.splitContainer7.SplitterWidth = 1;
+            this.splitContainer7.TabIndex = 0;
+            // 
+            // richTextBoxFlashHex
+            // 
+            this.richTextBoxFlashHex.AutoWordSelection = true;
+            this.richTextBoxFlashHex.DetectUrls = false;
+            this.richTextBoxFlashHex.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxFlashHex.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBoxFlashHex.HideSelection = false;
+            this.richTextBoxFlashHex.Location = new System.Drawing.Point(0, 0);
+            this.richTextBoxFlashHex.Name = "richTextBoxFlashHex";
+            this.richTextBoxFlashHex.ReadOnly = true;
+            this.richTextBoxFlashHex.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.richTextBoxFlashHex.Size = new System.Drawing.Size(365, 262);
+            this.richTextBoxFlashHex.TabIndex = 0;
+            this.richTextBoxFlashHex.Text = "";
+            this.richTextBoxFlashHex.SelectionChanged += new System.EventHandler(this.richTextBoxFlashHex_SelectionChanged);
+            // 
+            // vScrollBar1
+            // 
+            this.vScrollBar1.LargeChange = 1;
+            this.vScrollBar1.Location = new System.Drawing.Point(175, 2);
+            this.vScrollBar1.Name = "vScrollBar1";
+            this.vScrollBar1.Size = new System.Drawing.Size(19, 260);
+            this.vScrollBar1.TabIndex = 2;
+            this.vScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
+            this.vScrollBar1.ValueChanged += new System.EventHandler(this.vScrollBar1_ValueChanged);
+            // 
+            // richTextBoxFlashData
+            // 
+            this.richTextBoxFlashData.AutoWordSelection = true;
+            this.richTextBoxFlashData.DetectUrls = false;
+            this.richTextBoxFlashData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxFlashData.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBoxFlashData.HideSelection = false;
+            this.richTextBoxFlashData.Location = new System.Drawing.Point(0, 0);
+            this.richTextBoxFlashData.Name = "richTextBoxFlashData";
+            this.richTextBoxFlashData.ReadOnly = true;
+            this.richTextBoxFlashData.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.richTextBoxFlashData.Size = new System.Drawing.Size(197, 262);
+            this.richTextBoxFlashData.TabIndex = 1;
+            this.richTextBoxFlashData.Text = "";
+            this.richTextBoxFlashData.SelectionChanged += new System.EventHandler(this.richTextBoxFlashData_SelectionChanged);
             // 
             // tabPage2
             // 
@@ -511,7 +834,8 @@
             "esptool",
             "espefuse",
             "espsecure",
-            "gen_esp32part"});
+            "gen_esp32part",
+            "parttool"});
             this.ExpertComboboxTool.Location = new System.Drawing.Point(27, 32);
             this.ExpertComboboxTool.Name = "ExpertComboboxTool";
             this.ExpertComboboxTool.Size = new System.Drawing.Size(144, 21);
@@ -701,11 +1025,12 @@
             // 
             this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-            this.richTextBox1.Size = new System.Drawing.Size(822, 185);
+            this.richTextBox1.Size = new System.Drawing.Size(822, 191);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "Output";
             // 
@@ -729,7 +1054,12 @@
             this.Text = "ESP Tools";
             this.Load += new System.EventHandler(this.MainPage_Load);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel1.PerformLayout();
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            this.splitContainer3.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -739,8 +1069,25 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage3.ResumeLayout(false);
+            this.contextMenuStripPartition.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.partitionChart)).EndInit();
             this.tabPage4.ResumeLayout(false);
+            this.tabPage6.ResumeLayout(false);
+            this.splitContainer5.Panel1.ResumeLayout(false);
+            this.splitContainer5.Panel1.PerformLayout();
+            this.splitContainer5.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
+            this.splitContainer5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFlashCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFlashAddr)).EndInit();
+            this.splitContainer6.Panel1.ResumeLayout(false);
+            this.splitContainer6.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).EndInit();
+            this.splitContainer6.ResumeLayout(false);
+            this.splitContainer7.Panel1.ResumeLayout(false);
+            this.splitContainer7.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).EndInit();
+            this.splitContainer7.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage5.ResumeLayout(false);
@@ -752,11 +1099,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
@@ -765,7 +1107,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox ExpertComboboxTool;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox infoTextboxMac;
@@ -779,13 +1120,6 @@
         private System.Windows.Forms.TextBox infoTextboxChipType;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataVisualization.Charting.Chart partitionChart;
-        private System.Windows.Forms.ListView partitionListview;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TextBox infoTextboxFlash;
@@ -809,5 +1143,39 @@
         private System.Windows.Forms.LinkLabel linkLabel5;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripPartition;
+        private System.Windows.Forms.ToolStripMenuItem readFlashToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ereasePartitionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem editPartitionTableToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.SplitContainer splitContainer5;
+        private System.Windows.Forms.Button buttonReadFlash;
+        private System.Windows.Forms.NumericUpDown numericUpDownFlashCount;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.NumericUpDown numericUpDownFlashAddr;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.RichTextBox richTextBoxFlashHex;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.SplitContainer splitContainer6;
+        private System.Windows.Forms.RichTextBox richTextBoxFlashLine;
+        private System.Windows.Forms.SplitContainer splitContainer7;
+        private System.Windows.Forms.RichTextBox richTextBoxFlashData;
+        private System.Windows.Forms.VScrollBar vScrollBar1;
+        private System.Windows.Forms.ListView partitionListview;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
     }
 }

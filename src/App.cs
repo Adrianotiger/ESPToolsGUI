@@ -9,7 +9,8 @@ namespace esp_tools_gui
     class App
     {
         public static MainPage form;
-
+        
+        [STAThread]
         static void Main() {
             
             form = new MainPage();
