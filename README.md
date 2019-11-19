@@ -15,6 +15,7 @@ You can compile it by yourself (as it is not signed) or download it from the rel
 |   |   |
 |--------|--------|
 | ![Partitions](docs/screen_partition.jpg) |  ![eFuses](docs/screen_fuse.jpg) |
+| ![Partitions](docs/screen_flash.jpg) |  ![eFuses](docs/screen_expert.jpg) |
 
 ## Links
 ESP Tools - all Python scripts:  
