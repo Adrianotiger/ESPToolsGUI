@@ -74,7 +74,8 @@ namespace esp_tools_gui
                 tList.ForEach((t)=> { comboBox1.Items.Add(t); });
             }
             comboBox1.SelectedIndex = 0;
-            foreach(ComPort i in comboBox1.Items)
+            if(comboBox1.Items.Count > 0) Tool._com = ((ComPort)comboBox1.Items[0]).PortId;
+            foreach (ComPort i in comboBox1.Items)
             {
                 if(Properties.Settings.Default.comport == i.ToString())
                 {
@@ -260,7 +261,8 @@ namespace esp_tools_gui
             }
             if (a.input.Length > 0)
             {
-                string txt = " > " + a.input + "\r\n";
+                string txt;
+                txt = "\r\n > " + a.input + "\r\n";
                 richTextBox1.SelectionColor = Color.White;
                 richTextBox1.AppendText(txt);
                 richTextBox1.SelectionColor = richTextBox1.ForeColor;
@@ -268,7 +270,8 @@ namespace esp_tools_gui
             }
             if(a.error.Length > 0)
             {
-                string txt = " [E] " + a.error + "\r\n";
+                string txt;
+                txt = "\r\n [E] " + a.error + "\r\n";
                 richTextBox1.SelectionColor = Color.LightCoral;
                 richTextBox1.AppendText(txt);
                 richTextBox1.SelectionColor = richTextBox1.ForeColor;
@@ -277,9 +280,12 @@ namespace esp_tools_gui
             }
             if(a.output.Length > 0)
             {
-                string txt = a.output + "\r\n";
+                string txt;
+                txt = a.output;
+                if (txt.Contains("fatal error")) HasError = true;
+                //else txt = a.output + "\r\n";
                 richTextBox1.AppendText(txt);
-                richTextBox1.ScrollToCaret();
+                if(txt.Contains("\r\n")) richTextBox1.ScrollToCaret();
             }
         }
 

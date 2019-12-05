@@ -59,55 +59,5 @@ namespace esp_tools_gui.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
-        /// </summary>
-        public static byte[] espefuse {
-            get {
-                object obj = ResourceManager.GetObject("espefuse", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
-        /// </summary>
-        public static byte[] espsecure {
-            get {
-                object obj = ResourceManager.GetObject("espsecure", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
-        /// </summary>
-        public static byte[] esptool {
-            get {
-                object obj = ResourceManager.GetObject("esptool", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
-        /// </summary>
-        public static byte[] gen_esp32part {
-            get {
-                object obj = ResourceManager.GetObject("gen_esp32part", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
-        /// </summary>
-        public static byte[] parttool {
-            get {
-                object obj = ResourceManager.GetObject("parttool", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }

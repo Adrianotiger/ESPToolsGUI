@@ -302,7 +302,7 @@ namespace esp_tools_gui
         private async void SavePartition(string filename)
         {
             await partition.CreatePartition(Nvs, Ota0, Ota1, Eeprom, Spiffs);
-            File.Copy(partition.GetPartitionPath(filename.EndsWith(".bin")), filename);
+            File.Copy(partition.GetPartitionPath(filename.EndsWith(".bin")), filename, true);
         }
 
         private void checkBoxOtaLock_CheckedChanged(object sender, EventArgs e)

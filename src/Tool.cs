@@ -12,11 +12,10 @@ namespace esp_tools_gui
 {
     public class Tool
     {
-        private byte[] _resource;
         private string _exe;
 
-        public static string _com;
-        public static string _baud;
+        public static string _com = "";
+        public static string _baud = "";
 
         private StringBuilder _outStr = new StringBuilder();
         protected readonly static string ExePath = Path.Combine(Directory.GetCurrentDirectory(), "exes");
@@ -24,9 +23,8 @@ namespace esp_tools_gui
 
         public event EventHandler<CustomEventArgs> ConsoleEvent;
 
-        public Tool(byte[] resource, string executable, bool AddComArgs)
+        public Tool(string executable, bool AddComArgs)
         {
-            _resource = resource;
             _exe = executable;
             _useComArgs = AddComArgs;
         }
@@ -45,46 +43,115 @@ namespace esp_tools_gui
             var t = Task.Run(() =>
             {
                 string tempExeName = Path.Combine(ExePath, _exe);
+
                 if (!File.Exists(tempExeName))
                 {
-                    var f = File.Create(tempExeName);
-                    f.Write(_resource, 0, _resource.Length);
-                    f.Close();
+                    var errMsg = "[" + _exe + "] File '" + _exe + "' not found in directory " + ExePath + "! Unable to start request.";
+                    ConsoleEvent.Invoke(this, new CustomEventArgs { error = errMsg });
                 }
-
-                var stopwatch = new Stopwatch();
-                stopwatch.Start();
-
-                using (var p = new Process())
+                else if (_com.Length < 3)
                 {
-                    _outStr.Clear();
-                    _outStr.Append(" >>> " + _exe + " " + GetComParam() + args + "\r\n");
-                    ConsoleEvent.Invoke(this, new CustomEventArgs { input = _exe + " " + GetComParam() + args });
-                    p.StartInfo = new ProcessStartInfo
-                    {
-                        FileName = tempExeName,
-                        UseShellExecute = false,
-                        WorkingDirectory = ExePath,
-                        WindowStyle = ProcessWindowStyle.Hidden,
-                        CreateNoWindow = true,
-                        Arguments = GetComParam() + args,
-                        RedirectStandardOutput = true,
-                        RedirectStandardError = true
-                    };
-
-                    //p.StartInfo.RedirectStandardError = true;
-                    p.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
-                    p.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
-                    p.Start();
-                    p.BeginOutputReadLine();
-                    p.BeginErrorReadLine();
-                    p.WaitForExit();
-                    p.Close();
+                    var errMsg = "[" + _exe + "] COM port is invalid (" + _com + ") - please select the right port and try again.";
+                    ConsoleEvent.Invoke(this, new CustomEventArgs { error = errMsg });
                 }
+                else
+                {
+                    var stopwatch = new Stopwatch();
+                    stopwatch.Start();
 
-                stopwatch.Stop();
-                long elapsed_time = stopwatch.ElapsedMilliseconds;
-                ConsoleEvent.Invoke(this, new CustomEventArgs { input = " [ execution time ] " + (elapsed_time / 1000.0) + " s" });
+                    using (var p = new Process())
+                    {
+                        _outStr.Clear();
+                        _outStr.Append(" >>> " + _exe + " " + GetComParam() + args + "\r\n");
+                        ConsoleEvent.Invoke(this, new CustomEventArgs { input = _exe + " " + GetComParam() + args });
+                        p.StartInfo = new ProcessStartInfo
+                        {
+                            FileName = tempExeName,
+                            UseShellExecute = false,
+                            WorkingDirectory = ExePath,
+                            WindowStyle = ProcessWindowStyle.Hidden,
+                            CreateNoWindow = true,
+                            Arguments = GetComParam() + args,
+                            RedirectStandardOutput = true,
+                            RedirectStandardError = true
+                        };
+
+                        //p.StartInfo.RedirectStandardError = true;
+                        //p.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+                        p.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
+                        p.Start();
+                        //p.BeginOutputReadLine();
+                        p.BeginErrorReadLine();
+                        int dataReceived = 0;
+
+                        var sTemp = "";
+                        var outputReadTask = Task.Run(() => {
+                            int iCh = 0;
+                            var s2 = "";
+                            var s3 = "";
+                            try
+                            {
+                                do
+                                {
+                                    iCh = p.StandardOutput.Read();
+                                    if (iCh >= 0)
+                                    {
+                                        if (iCh == 8)
+                                        {
+                                            s3 = "\r\n";
+                                            s2 = " ";
+                                        }
+                                        else
+                                        {
+                                            s2 = s3 + char.ConvertFromUtf32(iCh);
+                                            if (s3.Length > 0) s3 = "";
+                                        }
+                                        sTemp += s2;
+                                    }
+                                } while (iCh >= 0);
+                            }
+                            catch (Exception e) { 
+                                int k = 0; 
+                            }
+                        });
+
+                        do
+                        {
+                            try
+                            {
+                                if (sTemp.Length > 0)
+                                {
+                                    dataReceived++;
+                                    var s = sTemp;
+                                    sTemp = "";
+                                    _outStr.Append(s);
+                                    ConsoleEvent.Invoke(this, new CustomEventArgs { output = s });
+                                }
+                                else
+                                {
+                                    p.WaitForExit(200);
+                                }
+                            }
+                            catch (Exception) { }
+
+                            if (dataReceived == 0 && stopwatch.ElapsedMilliseconds > 3000)
+                            {
+                                ConsoleEvent.Invoke(this, new CustomEventArgs { error = "Request timeout." });
+                                break;
+                            }
+                        } while (!p.HasExited);
+                        if (sTemp.Length > 0)
+                        {
+                            _outStr.Append(sTemp);
+                            ConsoleEvent.Invoke(this, new CustomEventArgs { output = sTemp });
+                        }
+                        p.Close();
+                    }
+
+                    stopwatch.Stop();
+                    long elapsed_time = stopwatch.ElapsedMilliseconds;
+                    ConsoleEvent.Invoke(this, new CustomEventArgs { input = " [ execution time ] " + (elapsed_time / 1000.0) + " s" });
+                }
 
                 Connecting.Terminate();
             });

@@ -18,7 +18,7 @@ namespace esp_tools_gui
 
         public List<Partition> Partitions { get; set; } = new List<Partition>();
 
-        public ToolTool() : base(Properties.Resources.esptool, "esptool.exe", true)
+        public ToolTool() : base("esptool.exe", true)
         {
 
         }

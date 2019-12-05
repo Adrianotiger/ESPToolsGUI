@@ -40,5 +40,10 @@ namespace esp_tools_gui
         {
             Stop = true;
         }
+
+        private void Connecting_Load(object sender, EventArgs e)
+        {
+            Top -= 200;
+        }
     }
 }

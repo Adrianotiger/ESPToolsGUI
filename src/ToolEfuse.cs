@@ -10,7 +10,7 @@ namespace esp_tools_gui
     {
         public Dictionary<string, List<EFuse>> Fuses = new Dictionary<string, List<EFuse>>();
 
-        public ToolEfuse() : base(Properties.Resources.espefuse, "espefuse.exe", true)
+        public ToolEfuse() : base("espefuse.exe", true)
         {
             
         }

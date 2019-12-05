@@ -8,7 +8,7 @@ namespace esp_tools_gui
 {
     class ToolPart : Tool
     {
-        public ToolPart() : base(Properties.Resources.parttool, "parttool.exe", true)
+        public ToolPart() : base("parttool.exe", true)
         {
 
         }

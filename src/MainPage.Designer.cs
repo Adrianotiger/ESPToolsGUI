@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -488,55 +488,55 @@
             this.toolStripMenuItem1,
             this.editPartitionTableToolStripMenuItem});
             this.contextMenuStripPartition.Name = "contextMenuStripPartition";
-            this.contextMenuStripPartition.Size = new System.Drawing.Size(181, 98);
+            this.contextMenuStripPartition.Size = new System.Drawing.Size(173, 76);
             // 
             // readFlashToolStripMenuItem
             // 
             this.readFlashToolStripMenuItem.Name = "readFlashToolStripMenuItem";
-            this.readFlashToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.readFlashToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.readFlashToolStripMenuItem.Text = "Read Partition";
             this.readFlashToolStripMenuItem.Click += new System.EventHandler(this.readFlashToolStripMenuItem_Click);
             // 
             // ereasePartitionToolStripMenuItem
             // 
             this.ereasePartitionToolStripMenuItem.Name = "ereasePartitionToolStripMenuItem";
-            this.ereasePartitionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ereasePartitionToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.ereasePartitionToolStripMenuItem.Text = "Erease Partition";
             this.ereasePartitionToolStripMenuItem.Click += new System.EventHandler(this.ereasePartitionToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(169, 6);
             // 
             // editPartitionTableToolStripMenuItem
             // 
             this.editPartitionTableToolStripMenuItem.Name = "editPartitionTableToolStripMenuItem";
-            this.editPartitionTableToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editPartitionTableToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.editPartitionTableToolStripMenuItem.Text = "Edit Partition Table";
             this.editPartitionTableToolStripMenuItem.Click += new System.EventHandler(this.editPartitionTableToolStripMenuItem_Click);
             // 
             // partitionChart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.partitionChart.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.partitionChart.ChartAreas.Add(chartArea1);
             this.partitionChart.Dock = System.Windows.Forms.DockStyle.Left;
-            legend2.Name = "Legend1";
-            this.partitionChart.Legends.Add(legend2);
+            legend1.Name = "Legend1";
+            this.partitionChart.Legends.Add(legend1);
             this.partitionChart.Location = new System.Drawing.Point(0, 0);
             this.partitionChart.Name = "partitionChart";
             this.partitionChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.partitionChart.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.partitionChart.Series.Add(series1);
             this.partitionChart.Size = new System.Drawing.Size(258, 262);
             this.partitionChart.TabIndex = 2;
             this.partitionChart.Text = "chart1";
-            title2.Name = "Title1";
-            title2.Text = "Partition Table";
-            this.partitionChart.Titles.Add(title2);
+            title1.Name = "Title1";
+            title1.Text = "Partition Table";
+            this.partitionChart.Titles.Add(title1);
             // 
             // tabPage4
             // 
@@ -725,6 +725,7 @@
             // splitContainer7
             // 
             this.splitContainer7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer7.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer7.IsSplitterFixed = true;
             this.splitContainer7.Location = new System.Drawing.Point(0, 0);
             this.splitContainer7.Name = "splitContainer7";
@@ -760,10 +761,11 @@
             // 
             // vScrollBar1
             // 
+            this.vScrollBar1.Dock = System.Windows.Forms.DockStyle.Right;
             this.vScrollBar1.LargeChange = 1;
-            this.vScrollBar1.Location = new System.Drawing.Point(175, 2);
+            this.vScrollBar1.Location = new System.Drawing.Point(178, 0);
             this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(19, 260);
+            this.vScrollBar1.Size = new System.Drawing.Size(19, 262);
             this.vScrollBar1.TabIndex = 2;
             this.vScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
             this.vScrollBar1.ValueChanged += new System.EventHandler(this.vScrollBar1_ValueChanged);
