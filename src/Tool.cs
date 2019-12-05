@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -46,6 +47,15 @@ namespace esp_tools_gui
             var t = Task.Run(() =>
             {
                 string tempExeName = Path.Combine(ExePath, _exe);
+
+                if (!File.Exists(Path.Combine(ExePath, "python37.dll")) || !Directory.Exists(Path.Combine(ExePath, "lib")))
+                {
+                    if (File.Exists(Path.Combine(ExePath, "python37.dll")))
+                        File.Delete(Path.Combine(ExePath, "python37.dll"));
+                    if (Directory.Exists(Path.Combine(ExePath, "lib")))
+                        Directory.Delete(Path.Combine(ExePath, "lib"), true);
+                    ZipFile.ExtractToDirectory(Path.Combine(ExePath, "cxfreeze.zip"), ExePath);
+                }
 
                 if (!File.Exists(Path.Combine(ExePath, "python37.dll")))
                 {
