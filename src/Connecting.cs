@@ -29,6 +29,7 @@ namespace esp_tools_gui
         {
             if (Opacity < 1.0) Opacity += 0.05;
             if (progressBar1.Value < progressBar1.Maximum) progressBar1.Value++;
+            else if (linkLabel1.Visible == false) linkLabel1.Visible = true;
             if (Stop)
             {
                 timer1.Enabled = false;
@@ -44,6 +45,11 @@ namespace esp_tools_gui
         private void Connecting_Load(object sender, EventArgs e)
         {
             Top -= 200;
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Stop = true;
         }
     }
 }

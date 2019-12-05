@@ -154,6 +154,9 @@
     <None Include="exes\parttool.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="exes\python37.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="src\ESP32.ico" />
     <Content Include="images\esp32.jpg" />
   </ItemGroup>
