@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -518,25 +518,25 @@
             // 
             // partitionChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.partitionChart.ChartAreas.Add(chartArea1);
+            chartArea2.Name = "ChartArea1";
+            this.partitionChart.ChartAreas.Add(chartArea2);
             this.partitionChart.Dock = System.Windows.Forms.DockStyle.Left;
-            legend1.Name = "Legend1";
-            this.partitionChart.Legends.Add(legend1);
+            legend2.Name = "Legend1";
+            this.partitionChart.Legends.Add(legend2);
             this.partitionChart.Location = new System.Drawing.Point(0, 0);
             this.partitionChart.Name = "partitionChart";
             this.partitionChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.partitionChart.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.partitionChart.Series.Add(series2);
             this.partitionChart.Size = new System.Drawing.Size(258, 262);
             this.partitionChart.TabIndex = 2;
             this.partitionChart.Text = "chart1";
-            title1.Name = "Title1";
-            title1.Text = "Partition Table";
-            this.partitionChart.Titles.Add(title1);
+            title2.Name = "Title1";
+            title2.Text = "Partition Table";
+            this.partitionChart.Titles.Add(title2);
             // 
             // tabPage4
             // 
@@ -871,21 +871,21 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(81, 141);
+            this.label21.Location = new System.Drawing.Point(108, 141);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(96, 13);
+            this.label21.Size = new System.Drawing.Size(66, 13);
             this.label21.TabIndex = 15;
-            this.label21.Text = "AUTO PY TO EXE";
+            this.label21.Text = "CX FREEZE";
             // 
             // linkLabel5
             // 
             this.linkLabel5.AutoSize = true;
             this.linkLabel5.Location = new System.Drawing.Point(180, 141);
             this.linkLabel5.Name = "linkLabel5";
-            this.linkLabel5.Size = new System.Drawing.Size(242, 13);
+            this.linkLabel5.Size = new System.Drawing.Size(232, 13);
             this.linkLabel5.TabIndex = 14;
             this.linkLabel5.TabStop = true;
-            this.linkLabel5.Text = "https://github.com/brentvollebregt/auto-py-to-exe";
+            this.linkLabel5.Text = "https://github.com/anthony-tuininga/cx_Freeze";
             this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
             // 
             // label20
