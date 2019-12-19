@@ -535,7 +535,7 @@ namespace esp_tools_gui
             });
             if(lineIndex > 0)
             {
-                boardsFile.Insert(lineIndex, editNode.Text + ".menu.PartitionScheme." + textBox1.Text + ".upload.maximum_size=" + textBox1.Text);
+                boardsFile.Insert(lineIndex, editNode.Text + ".menu.PartitionScheme." + textBox1.Text + ".upload.maximum_size=" + partitionSize);
                 boardsFile.Insert(lineIndex, editNode.Text + ".menu.PartitionScheme." + textBox1.Text + ".build.partitions=" + textBox1.Text);
                 boardsFile.Insert(lineIndex, editNode.Text + ".menu.PartitionScheme." + textBox1.Text + "=" + textBox2.Text);
 

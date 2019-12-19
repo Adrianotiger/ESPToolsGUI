@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -113,6 +113,9 @@
             this.label11 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.EspImageList = new System.Windows.Forms.ImageList(this.components);
+            this.label26 = new System.Windows.Forms.Label();
+            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
+            this.label27 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
@@ -518,25 +521,25 @@
             // 
             // partitionChart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.partitionChart.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.partitionChart.ChartAreas.Add(chartArea1);
             this.partitionChart.Dock = System.Windows.Forms.DockStyle.Left;
-            legend2.Name = "Legend1";
-            this.partitionChart.Legends.Add(legend2);
+            legend1.Name = "Legend1";
+            this.partitionChart.Legends.Add(legend1);
             this.partitionChart.Location = new System.Drawing.Point(0, 0);
             this.partitionChart.Name = "partitionChart";
             this.partitionChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.partitionChart.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.partitionChart.Series.Add(series1);
             this.partitionChart.Size = new System.Drawing.Size(258, 262);
             this.partitionChart.TabIndex = 2;
             this.partitionChart.Text = "chart1";
-            title2.Name = "Title1";
-            title2.Text = "Partition Table";
-            this.partitionChart.Titles.Add(title2);
+            title1.Name = "Title1";
+            title1.Text = "Partition Table";
+            this.partitionChart.Titles.Add(title1);
             // 
             // tabPage4
             // 
@@ -845,6 +848,9 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.label26);
+            this.tabPage5.Controls.Add(this.linkLabel6);
+            this.tabPage5.Controls.Add(this.label27);
             this.tabPage5.Controls.Add(this.label21);
             this.tabPage5.Controls.Add(this.linkLabel5);
             this.tabPage5.Controls.Add(this.label20);
@@ -1042,6 +1048,34 @@
             this.EspImageList.ImageSize = new System.Drawing.Size(256, 256);
             this.EspImageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(108, 164);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(48, 13);
+            this.label26.TabIndex = 18;
+            this.label26.Text = "IMAGES";
+            // 
+            // linkLabel6
+            // 
+            this.linkLabel6.AutoSize = true;
+            this.linkLabel6.Location = new System.Drawing.Point(180, 164);
+            this.linkLabel6.Name = "linkLabel6";
+            this.linkLabel6.Size = new System.Drawing.Size(232, 13);
+            this.linkLabel6.TabIndex = 17;
+            this.linkLabel6.TabStop = true;
+            this.linkLabel6.Text = "https://www.iconfinder.com/iconsets/humano2";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(490, 164);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(33, 13);
+            this.label27.TabIndex = 16;
+            this.label27.Text = "Icons";
+            // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1179,5 +1213,8 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.LinkLabel linkLabel6;
+        private System.Windows.Forms.Label label27;
     }
 }
