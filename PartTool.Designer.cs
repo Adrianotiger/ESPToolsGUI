@@ -28,6 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PartTool));
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Partition Name");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Partitions", new System.Windows.Forms.TreeNode[] {
+            treeNode3});
             this.trackBarOta = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -50,13 +55,23 @@
             this.labelOta1 = new System.Windows.Forms.Label();
             this.trackBarOta1 = new System.Windows.Forms.TrackBar();
             this.checkBoxOtaLock = new System.Windows.Forms.CheckBox();
-            this.button4 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarOta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarNvs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarEeprom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpiffs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarOta1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // trackBarOta
@@ -229,29 +244,35 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(33, 379);
+            this.button1.Image = global::esp_tools_gui.Properties.Resources.export32;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button1.Location = new System.Drawing.Point(118, 338);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(141, 35);
+            this.button1.Size = new System.Drawing.Size(100, 55);
             this.button1.TabIndex = 15;
             this.button1.Text = "Export Table";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(33, 420);
+            this.button2.Image = global::esp_tools_gui.Properties.Resources.burn32;
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button2.Location = new System.Drawing.Point(224, 338);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(141, 35);
+            this.button2.Size = new System.Drawing.Size(100, 55);
             this.button2.TabIndex = 16;
             this.button2.Text = "Burn Table";
+            this.button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(355, 358);
+            this.button3.Location = new System.Drawing.Point(12, 401);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(141, 35);
+            this.button3.Size = new System.Drawing.Size(484, 30);
             this.button3.TabIndex = 17;
             this.button3.Text = "Cancel";
             this.button3.UseVisualStyleBackColor = true;
@@ -299,16 +320,6 @@
             this.checkBoxOtaLock.UseVisualStyleBackColor = true;
             this.checkBoxOtaLock.CheckedChanged += new System.EventHandler(this.checkBoxOtaLock_CheckedChanged);
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(33, 338);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(141, 35);
-            this.button4.TabIndex = 22;
-            this.button4.Text = "Import Table";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -317,11 +328,131 @@
             this.openFileDialog1.RestoreDirectory = true;
             this.openFileDialog1.Title = "Import Partition Table";
             // 
+            // button4
+            // 
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button4.Image = global::esp_tools_gui.Properties.Resources.import32;
+            this.button4.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button4.Location = new System.Drawing.Point(12, 338);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(100, 55);
+            this.button4.TabIndex = 22;
+            this.button4.Text = "Import Table";
+            this.button4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Image = global::esp_tools_gui.Properties.Resources.add32;
+            this.button5.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button5.Location = new System.Drawing.Point(330, 338);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(166, 55);
+            this.button5.TabIndex = 23;
+            this.button5.Text = "Add to Arduino IDE";
+            this.button5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button6);
+            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.treeView1);
+            this.groupBox1.Location = new System.Drawing.Point(531, 13);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(485, 380);
+            this.groupBox1.TabIndex = 24;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Partitions";
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "add.png");
+            this.imageList1.Images.SetKeyName(1, "burn.png");
+            this.imageList1.Images.SetKeyName(2, "export.png");
+            this.imageList1.Images.SetKeyName(3, "import.png");
+            this.imageList1.Images.SetKeyName(4, "kchart.png");
+            this.imageList1.Images.SetKeyName(5, "kde-folder-open.png");
+            // 
+            // treeView1
+            // 
+            this.treeView1.ImageIndex = 5;
+            this.treeView1.ImageList = this.imageList1;
+            this.treeView1.Indent = 20;
+            this.treeView1.ItemHeight = 16;
+            this.treeView1.Location = new System.Drawing.Point(6, 19);
+            this.treeView1.Name = "treeView1";
+            treeNode3.ImageIndex = 4;
+            treeNode3.Name = "Knoten2";
+            treeNode3.Text = "Partition Name";
+            treeNode4.Name = "Knoten0";
+            treeNode4.Text = "Partitions";
+            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode4});
+            this.treeView1.SelectedImageIndex = 0;
+            this.treeView1.Size = new System.Drawing.Size(472, 299);
+            this.treeView1.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 328);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(66, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Table name:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(79, 325);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(97, 20);
+            this.textBox1.TabIndex = 3;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(79, 351);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(247, 20);
+            this.textBox2.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 354);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Description:";
+            // 
+            // button6
+            // 
+            this.button6.Image = global::esp_tools_gui.Properties.Resources.add32;
+            this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button6.Location = new System.Drawing.Point(332, 325);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(146, 46);
+            this.button6.TabIndex = 24;
+            this.button6.Text = "Add to Arduino IDE";
+            this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // PartTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(508, 468);
+            this.ClientSize = new System.Drawing.Size(1044, 441);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.checkBoxOtaLock);
             this.Controls.Add(this.labelOta1);
@@ -356,6 +487,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarEeprom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpiffs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarOta1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -387,5 +520,14 @@
         private System.Windows.Forms.CheckBox checkBoxOtaLock;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label2;
     }
 }

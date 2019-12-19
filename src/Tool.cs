@@ -18,7 +18,6 @@ namespace esp_tools_gui
 
         public static string _com = "";
         public static string _baud = "";
-        private static bool _dllLoaded = false;
 
         private StringBuilder _outStr = new StringBuilder();
         protected readonly static string ExePath = Path.Combine(Directory.GetCurrentDirectory(), "exes");
@@ -135,7 +134,8 @@ namespace esp_tools_gui
                                     }
                                     catch (Exception e)
                                     {
-                                        int k = 0;
+                                        var errMsg = "[" + _exe + "] Exception: " + e.Message;
+                                        ConsoleEvent.Invoke(this, new CustomEventArgs { error = errMsg });
                                     }
                                 });
 

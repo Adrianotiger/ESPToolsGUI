@@ -158,6 +158,14 @@
     <None Include="exes\parttool.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="images\add.png" />
+    <None Include="images\burn.png" />
+    <None Include="images\export.png" />
+    <None Include="images\import.png" />
+    <None Include="images\add32.png" />
+    <None Include="images\burn32.png" />
+    <None Include="images\export32.png" />
+    <None Include="images\import32.png" />
     <Content Include="src\ESP32.ico" />
     <Content Include="images\esp32.jpg" />
   </ItemGroup>

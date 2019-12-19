@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -38,6 +39,8 @@ namespace esp_tools_gui
             progressBar1.Maximum = flashSizeKB;
 
             partition = partitionTool;
+
+            this.Width /= 2;
         }
 
         private void PartTool_Load(object sender, EventArgs e)
@@ -276,8 +279,15 @@ namespace esp_tools_gui
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
-            this.Close();
+            if (groupBox1.Left == progressBar1.Left)
+            {
+                groupBox1.Left = this.Width + 100;
+            }
+            else
+            {
+                DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -312,42 +322,257 @@ namespace esp_tools_gui
 
         private async void button4_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                if(await partition.ImportTable(openFileDialog1.FileName))
-                {
-                    var csv = File.ReadAllLines(partition.GetPartitionPath(false));
-                    foreach(var line in csv)
-                    {
-                        if (line.StartsWith("#")) continue;
-                        var items = line.Split(',');
-                        if (items.Count() < 5) continue;
-                        switch(items[0].Trim())
-                        {
-                            case "nvs": SetNvs(Convert.ToInt32(items[4].Trim(), 16)); break;
-                            case "app0": SetOta0(Convert.ToInt32(items[4].Trim(), 16), null); break;
-                            case "app1": SetOta1(Convert.ToInt32(items[4].Trim(), 16)); break;
-                            case "eeprom": SetEeprom(Convert.ToInt32(items[4].Trim(), 16)); break;
-                            case "spiffs": SetSpiffs(Convert.ToInt32(items[4].Trim(), 16)); break;
-                            case "otadata": Otad = Convert.ToInt32(items[4].Trim(), 16); break;
-                            default: MessageBox.Show("Error: can't import this partition: " + items[0].Trim() + " - it will be ignored", "Import partitions"); break;
-                        }
+            openFileDialog1.Title = "Import partition table";
 
-                        /*
-                            nvs, data, nvs, 0x9000, 0x5000,
-                            otadata, data, ota, 0xe000, 0x2000,
-                            app0, app, ota_0, 0x10000, 0x180000,
-                            app1, app, ota_1, 0x190000, 0x100000,
-                            eeprom, data, 0x99, 0x310000, 0x1000,
-                            spiffs, data, spiffs, 0x311000, 0x16f000,
-                         */
+            if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
+
+            if(await partition.ImportTable(openFileDialog1.FileName))
+            {
+                var csv = File.ReadAllLines(partition.GetPartitionPath(false));
+                foreach(var line in csv)
+                {
+                    if (line.StartsWith("#")) continue;
+                    var items = line.Split(',');
+                    if (items.Count() < 5) continue;
+                    switch(items[0].Trim())
+                    {
+                        case "nvs": SetNvs(Convert.ToInt32(items[4].Trim(), 16)); break;
+                        case "app0": SetOta0(Convert.ToInt32(items[4].Trim(), 16), null); break;
+                        case "app1": SetOta1(Convert.ToInt32(items[4].Trim(), 16)); break;
+                        case "eeprom": SetEeprom(Convert.ToInt32(items[4].Trim(), 16)); break;
+                        case "spiffs": SetSpiffs(Convert.ToInt32(items[4].Trim(), 16)); break;
+                        case "otadata": Otad = Convert.ToInt32(items[4].Trim(), 16); break;
+                        default: MessageBox.Show("Error: can't import this partition: " + items[0].Trim() + " - it will be ignored", "Import partitions"); break;
+                    }
+
+                    /*
+                        nvs, data, nvs, 0x9000, 0x5000,
+                        otadata, data, ota, 0xe000, 0x2000,
+                        app0, app, ota_0, 0x10000, 0x180000,
+                        app1, app, ota_1, 0x190000, 0x100000,
+                        eeprom, data, 0x99, 0x310000, 0x1000,
+                        spiffs, data, spiffs, 0x311000, 0x16f000,
+                        */
+                }
+            }
+            else
+            {
+                MessageBox.Show("Unable to import partition table " + openFileDialog1.FileName, "Import");
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            treeView1.Nodes.Clear();
+            openFileDialog1.Title = "Select partition file to insert into Arduino IDE:";
+            openFileDialog1.FilterIndex = 1;
+
+            if (sender == button6)
+            {
+                // do not open the dialog again
+            }
+            else
+            {
+                if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
+            }
+
+            textBox1.Text = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
+
+            var appData = EnterPartitionFolder();
+            if (appData == "") return;
+
+            var dirs = Directory.GetDirectories(appData);
+            foreach(var d in dirs)
+            {
+                var boardsFile = File.ReadAllLines(Path.Combine(d, "boards.txt"));
+                TreeNode tn = treeView1.Nodes.Add(Path.GetFileName(d), Path.GetFileName(d), 5);
+                List<string> boards = new List<string>();
+                foreach(var l in boardsFile)
+                {
+                    var m = Regex.Match(l, @"([a-zA-Z0-9_]*).name=");
+                    if (m.Groups.Count > 1)
+                    {
+                        boards.Add(m.Groups[1].Value);
+                        tn.Nodes.Add(m.Groups[1].Value, m.Groups[1].Value, 5);
+                    }
+                }
+                boards.ForEach(x => {
+                    List<TreeNode> tn2 = new List<TreeNode>();
+                    foreach (var l in boardsFile)
+                    {
+                        var m = Regex.Match(l, @"^" + x + @".menu.PartitionScheme.([a-zA-Z0-9_]*)=(.*)");
+                        if (m.Groups.Count > 2)
+                        {
+                            tn2.Add(tn.Nodes[x].Nodes.Add(m.Groups[1].Value, m.Groups[2].Value, 5));
+                            //tn.Nodes.Add(m.Groups[1].Value, m.Groups[1].Value, 5);
+                        }
+                    }
+                    if(tn2.Count > 0)
+                    {
+                        foreach (var l in boardsFile)
+                        {
+                            tn2.ForEach(y =>
+                            {
+                                var m = Regex.Match(l, @"^" + x + @".menu.PartitionScheme." + y.Name + @"\." + @"([a-zA-Z0-9_.]*)=(.*)");
+                                if (m.Groups.Count > 2)
+                                {
+                                    y.Nodes.Add(m.Groups[1].Value, m.Groups[1].Value + ":" + m.Groups[2].Value, 4);
+                                    //tn.Nodes.Add(m.Groups[1].Value, m.Groups[1].Value, 5);
+                                }
+                            });
+                        }
+                    }
+                    else
+                    {
+                        tn.Nodes[x].Remove();
+                    }
+                });
+
+            }
+
+            groupBox1.Visible = true;
+            groupBox1.Left = progressBar1.Left;
+        }
+
+        private string EnterSubFolder(string mainFolder, string subFolder, bool showError = true)
+        {
+            if(!Directory.Exists(Path.Combine(mainFolder, subFolder)))
+            {
+                if(showError) MessageBox.Show("Folder " + Path.Combine(mainFolder, subFolder) + " not found");
+                return "";
+            }
+            return Path.Combine(mainFolder, subFolder);
+        }
+
+        private string EnterPartitionFolder()
+        {
+            var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            var isLocal = EnterSubFolder(appData, "local", false);
+            if (isLocal == "") appData = EnterSubFolder(appData, "../local");
+            else appData = isLocal;
+            appData = EnterSubFolder(appData, "Arduino15");
+            if (appData != "") appData = EnterSubFolder(appData, "packages");
+            if (appData != "") appData = EnterSubFolder(appData, "esp32");
+            if (appData != "") appData = EnterSubFolder(appData, "hardware");
+            if (appData != "") appData = EnterSubFolder(appData, "esp32");
+            return appData;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (textBox2.Text.Length < 3)
+            {
+                MessageBox.Show("Add a description for your partition", "No description", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (treeView1.Nodes.Count == 0 || treeView1.Nodes[0].Nodes.Count == 0)
+            {
+                MessageBox.Show("No board found inside this directory.", "No board", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            TreeNode editNode = null;
+            int partitionSize = GetSizeFromFile(openFileDialog1.FileName);
+
+            for (var j = 0; j < treeView1.Nodes[0].Nodes.Count; j++)
+            {
+                if (treeView1.Nodes[0].Nodes[j].IsSelected)
+                {
+                    editNode = treeView1.Nodes[0].Nodes[j];
+                    break;
+                }
+            }
+            if (editNode == null)
+            {
+                MessageBox.Show("Please select the board to copy the new partition.", "No board", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (partitionSize == 0)
+            {
+                MessageBox.Show("Unable to detect partition size of OTA0", "invalid partition file", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            var appData = EnterPartitionFolder();
+            appData = EnterSubFolder(appData, editNode.Parent.Text);
+            if (appData == "") return;
+            var boardsFile = File.ReadAllLines(Path.Combine(appData, "boards.txt")).ToList();
+            List<string> boards = new List<string>();
+            bool boardFound = false;
+            bool partitionsFound = false;
+            int lineIndex = 0;
+            int index = 0;
+            boardsFile.ForEach(l => {
+                index++;
+                if(lineIndex > 0)
+                {
+
+                }
+                else if (!boardFound)
+                {
+                    var m = Regex.Match(l, @"([a-zA-Z0-9_]*).name=");
+                    if (m.Groups.Count > 1 && m.Groups[1].Value == editNode.Text)
+                    {
+                        boardFound = true;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Unable to import partition table " + openFileDialog1.FileName, "Import");
+                    if (!partitionsFound)
+                    {
+                        if (Regex.IsMatch(l, @"^" + editNode.Text + @".menu.PartitionScheme."))
+                        {
+                            partitionsFound = true;
+                        }
+                    }
+                    else
+                    {
+                        if (!Regex.IsMatch(l, @"^" + editNode.Text + @".menu.PartitionScheme."))
+                        {
+                            lineIndex = index - 1;
+                        }
+                    }
+                }
+            });
+            if(lineIndex > 0)
+            {
+                boardsFile.Insert(lineIndex, editNode.Text + ".menu.PartitionScheme." + textBox1.Text + ".upload.maximum_size=" + textBox1.Text);
+                boardsFile.Insert(lineIndex, editNode.Text + ".menu.PartitionScheme." + textBox1.Text + ".build.partitions=" + textBox1.Text);
+                boardsFile.Insert(lineIndex, editNode.Text + ".menu.PartitionScheme." + textBox1.Text + "=" + textBox2.Text);
+
+                File.WriteAllLines(Path.Combine(appData, "boards.txt"), boardsFile);
+
+                button5_Click(sender, e);
+            }
+            else
+            {
+                MessageBox.Show("Unable to find partition scheme on this board", "index not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+        }
+
+        private int GetSizeFromFile(string file)
+        {
+            if (file.EndsWith(".bin"))
+            {
+                var bytes = File.ReadAllBytes(file);
+                for (var j = 0; j < 16; j++)
+                {
+                    if(Encoding.ASCII.GetString(bytes, 12 + 32 * j, 10).Trim('\0') == "app0")
+                    {
+                        int size = 0;
+                        for(var k=0;k<4;k++)
+                        {
+                            size = (size << 8) + bytes[11 + 32 * j - k];
+                        }
+                        return size;
+                    }
                 }
             }
+            else
+            {
+                var lines = File.ReadAllLines(file);
+            }
+            return 0;
         }
     }
 }
