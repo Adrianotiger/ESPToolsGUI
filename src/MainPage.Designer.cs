@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -95,6 +95,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.ExpertComboboxTool = new System.Windows.Forms.ComboBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label26 = new System.Windows.Forms.Label();
+            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
+            this.label27 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.linkLabel5 = new System.Windows.Forms.LinkLabel();
             this.label20 = new System.Windows.Forms.Label();
@@ -113,9 +116,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.EspImageList = new System.Windows.Forms.ImageList(this.components);
-            this.label26 = new System.Windows.Forms.Label();
-            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
-            this.label27 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
@@ -421,6 +422,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.button2);
             this.tabPage3.Controls.Add(this.partitionListview);
             this.tabPage3.Controls.Add(this.partitionChart);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
@@ -492,54 +494,55 @@
             this.editPartitionTableToolStripMenuItem});
             this.contextMenuStripPartition.Name = "contextMenuStripPartition";
             this.contextMenuStripPartition.Size = new System.Drawing.Size(173, 76);
+            this.contextMenuStripPartition.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripPartition_Opening);
             // 
             // readFlashToolStripMenuItem
             // 
             this.readFlashToolStripMenuItem.Name = "readFlashToolStripMenuItem";
-            this.readFlashToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.readFlashToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.readFlashToolStripMenuItem.Text = "Read Partition";
             this.readFlashToolStripMenuItem.Click += new System.EventHandler(this.readFlashToolStripMenuItem_Click);
             // 
             // ereasePartitionToolStripMenuItem
             // 
             this.ereasePartitionToolStripMenuItem.Name = "ereasePartitionToolStripMenuItem";
-            this.ereasePartitionToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.ereasePartitionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ereasePartitionToolStripMenuItem.Text = "Erease Partition";
             this.ereasePartitionToolStripMenuItem.Click += new System.EventHandler(this.ereasePartitionToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(169, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
             // 
             // editPartitionTableToolStripMenuItem
             // 
             this.editPartitionTableToolStripMenuItem.Name = "editPartitionTableToolStripMenuItem";
-            this.editPartitionTableToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.editPartitionTableToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editPartitionTableToolStripMenuItem.Text = "Edit Partition Table";
             this.editPartitionTableToolStripMenuItem.Click += new System.EventHandler(this.editPartitionTableToolStripMenuItem_Click);
             // 
             // partitionChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.partitionChart.ChartAreas.Add(chartArea1);
+            chartArea2.Name = "ChartArea1";
+            this.partitionChart.ChartAreas.Add(chartArea2);
             this.partitionChart.Dock = System.Windows.Forms.DockStyle.Left;
-            legend1.Name = "Legend1";
-            this.partitionChart.Legends.Add(legend1);
+            legend2.Name = "Legend1";
+            this.partitionChart.Legends.Add(legend2);
             this.partitionChart.Location = new System.Drawing.Point(0, 0);
             this.partitionChart.Name = "partitionChart";
             this.partitionChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.partitionChart.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.partitionChart.Series.Add(series2);
             this.partitionChart.Size = new System.Drawing.Size(258, 262);
             this.partitionChart.TabIndex = 2;
             this.partitionChart.Text = "chart1";
-            title1.Name = "Title1";
-            title1.Text = "Partition Table";
-            this.partitionChart.Titles.Add(title1);
+            title2.Name = "Title1";
+            title2.Text = "Partition Table";
+            this.partitionChart.Titles.Add(title2);
             // 
             // tabPage4
             // 
@@ -874,6 +877,34 @@
             this.tabPage5.Text = "Copyrights";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(108, 164);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(48, 13);
+            this.label26.TabIndex = 18;
+            this.label26.Text = "IMAGES";
+            // 
+            // linkLabel6
+            // 
+            this.linkLabel6.AutoSize = true;
+            this.linkLabel6.Location = new System.Drawing.Point(180, 164);
+            this.linkLabel6.Name = "linkLabel6";
+            this.linkLabel6.Size = new System.Drawing.Size(232, 13);
+            this.linkLabel6.TabIndex = 17;
+            this.linkLabel6.TabStop = true;
+            this.linkLabel6.Text = "https://www.iconfinder.com/iconsets/humano2";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(490, 164);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(33, 13);
+            this.label27.TabIndex = 16;
+            this.label27.Text = "Icons";
+            // 
             // label21
             // 
             this.label21.AutoSize = true;
@@ -1048,33 +1079,15 @@
             this.EspImageList.ImageSize = new System.Drawing.Size(256, 256);
             this.EspImageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // label26
+            // button2
             // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(108, 164);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(48, 13);
-            this.label26.TabIndex = 18;
-            this.label26.Text = "IMAGES";
-            // 
-            // linkLabel6
-            // 
-            this.linkLabel6.AutoSize = true;
-            this.linkLabel6.Location = new System.Drawing.Point(180, 164);
-            this.linkLabel6.Name = "linkLabel6";
-            this.linkLabel6.Size = new System.Drawing.Size(232, 13);
-            this.linkLabel6.TabIndex = 17;
-            this.linkLabel6.TabStop = true;
-            this.linkLabel6.Text = "https://www.iconfinder.com/iconsets/humano2";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(490, 164);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(33, 13);
-            this.label27.TabIndex = 16;
-            this.label27.Text = "Icons";
+            this.button2.Location = new System.Drawing.Point(184, 214);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(73, 47);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "Edit partition table";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // MainPage
             // 
@@ -1216,5 +1229,6 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.LinkLabel linkLabel6;
         private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Button button2;
     }
 }

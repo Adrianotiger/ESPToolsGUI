@@ -424,6 +424,12 @@ namespace esp_tools_gui
                         case "app1":
                             pt.SetOta1(int.Parse(size.ToString()));
                             break;
+                        case "otadata":
+                            pt.SetOtaD(int.Parse(size.ToString()));
+                            break;
+                        case "ffat":
+                            pt.SetFfat(int.Parse(size.ToString()));
+                            break;
                         case "spiffs":
                             pt.SetSpiffs(int.Parse(size.ToString()));
                             break;
@@ -431,7 +437,7 @@ namespace esp_tools_gui
                 }
                 if (pt.ShowDialog() == DialogResult.Yes)
                 {
-                    var res = partition.CreatePartition(PartTool.Nvs, PartTool.Ota0, PartTool.Ota1, PartTool.Eeprom, PartTool.Spiffs);
+                    var res = partition.CreatePartition(PartTool.Nvs, PartTool.Ota0, PartTool.Ota1, PartTool.Eeprom, PartTool.Spiffs, PartTool.Ffat);
                     await tool.Execute("--before default_reset --after hard_reset write_flash 0x8000 part.bin");
                     FillPartitionTab();
                 }
@@ -555,6 +561,16 @@ namespace esp_tools_gui
                     }
                 }
             }
+        }
+
+        private void contextMenuStripPartition_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            editPartitionTableToolStripMenuItem_Click(sender, e);
         }
     }
 

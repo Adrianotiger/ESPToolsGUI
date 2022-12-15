@@ -28,6 +28,7 @@ namespace esp_tools_gui
         public static int Otad = 8 * 1024;
         public static bool OtaEnabled = false;
         public static int Spiffs = 0;
+        public static int Ffat = 0;
 
         public PartTool(int flashMB, ToolPartition partitionTool)
         {
@@ -47,8 +48,10 @@ namespace esp_tools_gui
         {
             trackBarOta.SmallChange = 64;
             trackBarOta1.SmallChange = 64;
+            trackBarOtaD.SmallChange = 1;
             trackBarOta.TickFrequency = 256;
             trackBarOta1.TickFrequency = 256;
+            trackBarOtaD.TickFrequency = 8;
 
             trackBarEeprom.SmallChange = 4;
             trackBarNvs.SmallChange = 4;
@@ -57,6 +60,8 @@ namespace esp_tools_gui
 
             trackBarSpiffs.SmallChange = 4;
             trackBarSpiffs.TickFrequency = 128;
+            trackBarFfat.SmallChange = 4;
+            trackBarFfat.TickFrequency = 128;
             Calculate();
         }
 
@@ -70,6 +75,7 @@ namespace esp_tools_gui
             else total += Ota0;
             if (checkBoxEeprom.Checked) total += Eeprom;            
             if (checkBoxSpiffs.Checked) total += Spiffs;
+            if (checkBoxFfat.Checked) total += Ffat;
             total /= 1024;
             free = flashSizeKB - total;
 
@@ -94,9 +100,11 @@ namespace esp_tools_gui
             {
                 labelOta1.Text = trackBarOta1.Value + "kb";
             }
+            labelOtaD.Text = trackBarOtaD.Value + "kb";
             labelNvs.Text = (checkBoxNvs.Checked ? trackBarNvs.Value.ToString() : "0") + "kb";
             labelEeprom.Text = (checkBoxEeprom.Checked ? trackBarEeprom.Value.ToString() : "0") + "kb";
             labelSpiffs.Text = (checkBoxSpiffs.Checked ? trackBarSpiffs.Value.ToString() : "0") + "kb";
+            labelFfat.Text = (checkBoxFfat.Checked ? trackBarFfat.Value.ToString() : "0") + "kb";
 
             if (free < 0) return free;
 
@@ -108,6 +116,7 @@ namespace esp_tools_gui
                 trackBarOta.Maximum = trackBarOta.Value + free;
             trackBarOta1.Maximum = trackBarOta1.Value + free;
             trackBarSpiffs.Maximum = trackBarSpiffs.Value + free;
+            trackBarFfat.Maximum = trackBarFfat.Value + free;
 
             return free;
         }
@@ -115,6 +124,7 @@ namespace esp_tools_gui
         public void SetEeprom(int size)
         {
             Eeprom = size;
+            if (!trackBarEeprom.Enabled) checkBoxEeprom.Checked = true;
             if (size / 1024 > trackBarEeprom.Maximum) trackBarEeprom.Maximum = size / 1024;
             trackBarEeprom.Value = size / 1024;
             Calculate();
@@ -156,12 +166,31 @@ namespace esp_tools_gui
             OtaEnabled = true;
             Calculate();
         }
+        public void SetOtaD(int size)
+        {
+            //Otad = size;
+            if (size / 1024 > trackBarOtaD.Maximum) trackBarOtaD.Maximum = size / 1024;
+            trackBarOtaD.Minimum = 0;
+            trackBarOtaD.Value = size / 1024;
+            checkBoxOtaD.Checked = true;
+            Calculate();
+        }
 
         public void SetSpiffs(int size)
         {
             Spiffs = size;
+            if (!trackBarSpiffs.Enabled) checkBoxSpiffs.Checked = true;
             if (size / 1024 > trackBarSpiffs.Maximum) trackBarSpiffs.Maximum = size / 1024;
             trackBarSpiffs.Value = size / 1024;
+            Calculate();
+        }
+
+        public void SetFfat(int size)
+        {
+            Ffat = size;
+            if (!trackBarFfat.Enabled) checkBoxFfat.Checked = true;
+            if (size / 1024 > trackBarFfat.Maximum) trackBarFfat.Maximum = size / 1024;
+            trackBarFfat.Value = size / 1024;
             Calculate();
         }
 
@@ -208,6 +237,13 @@ namespace esp_tools_gui
         {
             Spiffs = (trackBarSpiffs.Value - trackBarSpiffs.Value % 4) * 1024;
             trackBarSpiffs.Value = Spiffs / 1024;
+            Calculate();
+        }
+
+        private void trackBarFfat_ValueChanged(object sender, EventArgs e)
+        {
+            Ffat = (trackBarFfat.Value - trackBarFfat.Value % 4) * 1024;
+            trackBarFfat.Value = Ffat / 1024;
             Calculate();
         }
 
@@ -277,6 +313,22 @@ namespace esp_tools_gui
             }
         }
 
+        private void checkBoxFfat_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxFfat.Checked)
+            {
+                Ffat = trackBarFfat.Value * 1024;
+                trackBarFfat.Enabled = true;
+                Calculate();
+            }
+            else
+            {
+                Ffat = 0;
+                trackBarFfat.Enabled = false;
+                Calculate();
+            }
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
             if (groupBox1.Left == progressBar1.Left)
@@ -311,13 +363,36 @@ namespace esp_tools_gui
 
         private async void SavePartition(string filename)
         {
-            await partition.CreatePartition(Nvs, Ota0, Ota1, Eeprom, Spiffs);
+            await partition.CreatePartition(Nvs, Ota0, Ota1, Eeprom, Spiffs, Ffat);
             File.Copy(partition.GetPartitionPath(filename.EndsWith(".bin")), filename, true);
         }
 
         private void checkBoxOtaLock_CheckedChanged(object sender, EventArgs e)
         {
             trackBarOta1.Enabled = !checkBoxOtaLock.Checked;
+        }
+
+        private int convertCSVInteger(string inString)
+        {
+            if(inString.StartsWith("0x"))
+            {
+                return Convert.ToInt32(inString.Trim(), 16);
+            }
+            else
+            {
+                int multiplier = 0;
+                if(inString.Contains("K"))
+                {
+                    inString = inString.Replace("K", "");
+                    multiplier = 1024;
+                }
+                else if (inString.Contains("M"))
+                {
+                    inString = inString.Replace("M", "");
+                    multiplier = 1024 * 1024;
+                }
+                return Convert.ToInt32(inString.Trim(), 10) * multiplier;
+            }
         }
 
         private async void button4_Click(object sender, EventArgs e)
@@ -336,12 +411,13 @@ namespace esp_tools_gui
                     if (items.Count() < 5) continue;
                     switch(items[0].Trim())
                     {
-                        case "nvs": SetNvs(Convert.ToInt32(items[4].Trim(), 16)); break;
-                        case "app0": SetOta0(Convert.ToInt32(items[4].Trim(), 16), null); break;
-                        case "app1": SetOta1(Convert.ToInt32(items[4].Trim(), 16)); break;
-                        case "eeprom": SetEeprom(Convert.ToInt32(items[4].Trim(), 16)); break;
-                        case "spiffs": SetSpiffs(Convert.ToInt32(items[4].Trim(), 16)); break;
-                        case "otadata": Otad = Convert.ToInt32(items[4].Trim(), 16); break;
+                        case "nvs": SetNvs(convertCSVInteger(items[4])); break;
+                        case "app0": SetOta0(convertCSVInteger(items[4]), null); break;
+                        case "app1": SetOta1(convertCSVInteger(items[4])); break;
+                        case "eeprom": SetEeprom(convertCSVInteger(items[4])); break;
+                        case "ffat": SetFfat(convertCSVInteger(items[4])); break;
+                        case "spiffs": SetSpiffs(convertCSVInteger(items[4])); break;
+                        case "otadata": Otad = convertCSVInteger(items[4]); break;
                         default: MessageBox.Show("Error: can't import this partition: " + items[0].Trim() + " - it will be ignored", "Import partitions"); break;
                     }
 

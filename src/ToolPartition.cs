@@ -14,7 +14,7 @@ namespace esp_tools_gui
 
         }
 
-        public async Task<string> CreatePartition(int nvs, int ota0, int ota1, int eeprom, int spiffs)
+        public async Task<string> CreatePartition(int nvs, int ota0, int ota1, int eeprom, int spiffs, int ffat)
         {
             int addr = 0x9000;
             String text = "# Name,   Type, SubType, Offset,  Size, Flags\n";
@@ -41,6 +41,11 @@ namespace esp_tools_gui
             {
                 text += "spiffs, data, spiffs, 0x" + addr.ToString("x") + ", 0x" + spiffs.ToString("x") + ",\n";
                 addr += spiffs;
+            }
+            if (ffat > 0)
+            {
+                text += "ffat, data, fat, 0x" + addr.ToString("x") + ", 0x" + ffat.ToString("x") + ",\n";
+                addr += ffat;
             }
 
             String csvFile = GetPartitionPath(false);

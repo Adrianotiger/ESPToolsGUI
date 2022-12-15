@@ -1,9 +1,6 @@
 from cx_Freeze import setup, Executable
 
 executables = [
-	Executable("espefuse.py", base="Console", icon="ESP32py.ico"),
-	Executable("espsecure.py", base="Console", icon="ESP32py.ico"),
-	Executable("esptool.py", base="Console", icon="ESP32py.ico"),
 	Executable("gen_esp32part.py", base="Console", icon="ESP32py.ico"),
 	Executable("parttool.py", base="Console", icon="ESP32py.ico")
 ]

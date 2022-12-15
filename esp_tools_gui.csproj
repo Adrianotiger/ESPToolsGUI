@@ -166,6 +166,12 @@
     <None Include="images\burn32.png" />
     <None Include="images\export32.png" />
     <None Include="images\import32.png" />
+    <None Include="exes\python3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="exes\python310.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="src\ESP32.ico" />
     <Content Include="images\esp32.jpg" />
   </ItemGroup>

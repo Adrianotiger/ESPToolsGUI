@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace esp_tools_gui
 {
@@ -21,6 +22,7 @@ namespace esp_tools_gui
 
         private StringBuilder _outStr = new StringBuilder();
         protected readonly static string ExePath = Path.Combine(Directory.GetCurrentDirectory(), "exes");
+        protected readonly static string PythonDll = "python310.dll";
         private bool _useComArgs = true;
 
         public event EventHandler<CustomEventArgs> ConsoleEvent;
@@ -47,16 +49,16 @@ namespace esp_tools_gui
             {
                 string tempExeName = Path.Combine(ExePath, _exe);
 
-                if (!File.Exists(Path.Combine(ExePath, "python37.dll")) || !Directory.Exists(Path.Combine(ExePath, "lib")))
+                if (!File.Exists(Path.Combine(ExePath, PythonDll)) || !Directory.Exists(Path.Combine(ExePath, "lib")))
                 {
-                    if (File.Exists(Path.Combine(ExePath, "python37.dll")))
-                        File.Delete(Path.Combine(ExePath, "python37.dll"));
+                    if (File.Exists(Path.Combine(ExePath, PythonDll)))
+                        File.Delete(Path.Combine(ExePath, PythonDll));
                     if (Directory.Exists(Path.Combine(ExePath, "lib")))
                         Directory.Delete(Path.Combine(ExePath, "lib"), true);
                     ZipFile.ExtractToDirectory(Path.Combine(ExePath, "cxfreeze.zip"), ExePath);
                 }
 
-                if (!File.Exists(Path.Combine(ExePath, "python37.dll")))
+                if (!File.Exists(Path.Combine(ExePath, PythonDll)))
                 {
                     ConsoleEvent.Invoke(this, new CustomEventArgs { error = "Python DLL is not loaded." });
                 }
